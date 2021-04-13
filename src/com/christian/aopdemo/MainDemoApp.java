@@ -26,15 +26,20 @@ public class MainDemoApp {
 		System.out.println("Adding account");
 		theAccountDAO.addAccount(theAccount,true);
 		
+		theAccountDAO.setName("Chris");
+		theAccountDAO.setServiceCode("404");
+		String name=theAccountDAO.getName();
+		String code=theAccountDAO.getServiceCode();
+		
 		theAccountDAO.doWork();
 
 		
-		System.out.println("Adding membership DAO");
-		theMembershipDAO.addPerson();
+		//System.out.println("Adding membership DAO");
+	    //theMembershipDAO.addPerson();
 		
 		
-		System.out.println("Adding account in membership DAO");
-		theMembershipDAO.addAccount();
+		//System.out.println("Adding account in membership DAO");
+		//theMembershipDAO.addAccount();
 		
 		
 		
