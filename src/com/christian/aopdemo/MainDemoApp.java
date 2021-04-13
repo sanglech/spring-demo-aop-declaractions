@@ -20,22 +20,23 @@ public class MainDemoApp {
 		Account theAccount= new Account();
 		
 		//point cut expression matches on ALL add account methods
-		
+		theAccount.setLevel("404");
+		theAccount.setName("Chris");
 		
 		//call the buisness method
 		System.out.println("Adding account");
 		theAccountDAO.addAccount(theAccount,true);
 		
-		theAccountDAO.setName("Chris");
-		theAccountDAO.setServiceCode("404");
-		String name=theAccountDAO.getName();
-		String code=theAccountDAO.getServiceCode();
+		//theAccountDAO.setName("Chris");
+		//theAccountDAO.setServiceCode("404");
+		//String name=theAccountDAO.getName();
+		//String code=theAccountDAO.getServiceCode();
 		
 		theAccountDAO.doWork();
 
 		
-		//System.out.println("Adding membership DAO");
-	    //theMembershipDAO.addPerson();
+		System.out.println("Adding membership DAO");
+	    theMembershipDAO.addPerson();
 		
 		
 		//System.out.println("Adding account in membership DAO");
