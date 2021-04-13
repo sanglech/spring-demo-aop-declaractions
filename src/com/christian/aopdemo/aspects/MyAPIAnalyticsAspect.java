@@ -7,13 +7,11 @@ import org.springframework.stereotype.Component;
 
 @Aspect
 @Component
-@Order(1)
-public class MyDemoLoggingAspect {
-	
+@Order(50)
+public class MyAPIAnalyticsAspect {
 	@Before("com.christian.aopdemo.aspects.aopUtil.noGettersSetters()")
-	public void beforePackageAdviceInPackage1() {
-		System.out.println("\n========> Execution @Before advice on everything in package not getters and setters");
+	public void performAPIAnalytics() {
+		System.out.println("\n=========> Performing API Anlaytics");
 		
 	}
-	
 }
