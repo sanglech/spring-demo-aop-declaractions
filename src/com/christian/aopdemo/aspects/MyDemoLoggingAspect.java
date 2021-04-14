@@ -61,6 +61,21 @@ public class MyDemoLoggingAspect {
 		
 		System.out.println("\n=====> result is : "+ result);
 		
+		//Modify data before it reaches calling program
+		
+		
+		if(result!=null) {
+			convertAccountsToUpperCase(result);
+		}
+		
+	}
+
+	private void convertAccountsToUpperCase(List<Account> result) {
+		
+		for(Account person: result) {
+			String upperName= person.getName().toUpperCase();
+			person.setName(upperName);
+		}
 		
 	}
 	
