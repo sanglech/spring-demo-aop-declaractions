@@ -1,6 +1,7 @@
 package com.christian.aopdemo.aspects;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -15,20 +16,21 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import com.christian.aopdemo.Account;
+import com.christian.aopdemo.AroundWithLoggerDemoApp;
 
 @Aspect
 @Component
 @Order(1)
 public class MyDemoLoggingAspect {
-	
+	private Logger myLogger = Logger.getLogger(getClass().getName());
 	@Before("com.christian.aopdemo.aspects.aopUtil.noGettersSetters()")
 	public void beforePackageAdviceInPackage1(JoinPoint theJoinPoint) {
-		System.out.println("\n========> Execution @Before advice on everything in package not getters and setters");
+		myLogger.info("\n========> Execution @Before advice on everything in package not getters and setters");
 		
 		//display method signature
 		MethodSignature methodSig= (MethodSignature) theJoinPoint.getSignature();
 		
-		System.out.println("Method: "+ methodSig.toString());
+		myLogger.info("Method: "+ methodSig.toString());
 		
 		//display method args
 		Object[] args = theJoinPoint.getArgs();
@@ -37,12 +39,12 @@ public class MyDemoLoggingAspect {
 			
 			if(a instanceof Account) {
 				Account theAccount = (Account)a;
-				System.out.println("Name: "+theAccount.getName());
-				System.out.println("Level: "+theAccount.getLevel());
+				myLogger.info("Name: "+theAccount.getName());
+				myLogger.info("Level: "+theAccount.getLevel());
 			}
 			
 			else {
-				System.out.println("Arguments :"+a);
+				myLogger.info("Arguments :"+a);
 			}
 			
 		}
@@ -59,11 +61,11 @@ public class MyDemoLoggingAspect {
 		
 		String method = theJoinPoint.getSignature().toShortString();
 		
-		System.out.println("\n=====> Executing @AfterReturning on method: "+ method);
+		myLogger.info("\n=====> Executing @AfterReturning on method: "+ method);
 		
 		//print out results of method call
 		
-		System.out.println("\n=====> result is : "+ result);
+		myLogger.info("\n=====> result is : "+ result);
 		
 		//Modify data before it reaches calling program
 		
@@ -94,9 +96,9 @@ public class MyDemoLoggingAspect {
 		
 				String method = theJoinPoint.getSignature().toShortString();
 				
-				System.out.println("\n=====> Executing @AfterThrowing on method: "+ method);
+				myLogger.info("\n=====> Executing @AfterThrowing on method: "+ method);
 		//log the exception
-				System.out.println("\n=====>Exception is:  "+ theExc);		
+				myLogger.info("\n=====>Exception is:  "+ theExc);		
 				
 	}
 	
@@ -106,7 +108,7 @@ public class MyDemoLoggingAspect {
 		
 		String method = theJoinPoint.getSignature().toShortString();
 		
-		System.out.println("\n=====> Executing @After(Finally) on method: "+ method);
+		myLogger.info("\n=====> Executing @After(Finally) on method: "+ method);
 	}
 	
 	
@@ -116,7 +118,7 @@ public class MyDemoLoggingAspect {
 		// print out which method we are advising  on
 		
 		String method = thePJP.getSignature().toShortString();
-		System.out.println("\n=====> Executing @Around on method: "+ method);
+		myLogger.info("\n=====> Executing @Around on method: "+ method);
 
 		//get begin timestamp 
 		long begin=System.currentTimeMillis();
@@ -129,7 +131,7 @@ public class MyDemoLoggingAspect {
 		
 		//compute duration and display it
 		
-		System.out.println("Time to execute "+ method+"  " +(end-begin)/1000.0+ " seconds.");
+		myLogger.info("Time to execute "+ method+"  " +(end-begin)/1000.0+ " seconds.");
 		
 		
 		return result;
