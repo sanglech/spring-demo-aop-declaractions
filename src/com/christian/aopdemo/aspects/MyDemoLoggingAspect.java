@@ -124,7 +124,15 @@ public class MyDemoLoggingAspect {
 		long begin=System.currentTimeMillis();
 		
 		//execute the method
-		Object result = thePJP.proceed();
+		Object result =null;
+		
+		try {
+			 result = thePJP.proceed();
+		}catch(Exception e) {
+			myLogger.warning(e.getMessage());
+			result="No problems today!";
+		}
+		
 		
 		//get end timestamp
 		long end=System.currentTimeMillis();

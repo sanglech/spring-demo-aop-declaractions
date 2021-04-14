@@ -8,8 +8,8 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import com.christian.aopdemo.dao.AccountDAO;
 import com.christian.aopdemo.service.TrafficFortuneService;
 
-public class AroundWithLoggerDemoApp {
-	private static Logger myLogger = Logger.getLogger(AroundWithLoggerDemoApp.class.getName());
+public class AroundHandleExceptionDemoApp {
+	private static Logger myLogger = Logger.getLogger(AroundHandleExceptionDemoApp.class.getName());
 	public static void main(String[]args) {
 		
 		// read spring config java class
@@ -20,7 +20,16 @@ public class AroundWithLoggerDemoApp {
 		myLogger.info("---");
 		myLogger.info("\n Main Program: AroundDemoApp");
 		myLogger.info("---");
-		myLogger.info(fortuneService.getFortune(false));
+		
+		
+		try {
+			boolean tripwire=true;
+			myLogger.info(fortuneService.getFortune(tripwire));
+		}catch(Exception e) {
+			myLogger.info("Exception in Main: "+ e);
+		}
+		
+		
 		//close the context
 		context.close();
 		myLogger.info("Finished.");

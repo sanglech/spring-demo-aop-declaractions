@@ -24,4 +24,11 @@ public class TrafficFortuneService {
 		
 		
 	}
+
+	public String getFortune(boolean tripwire) {
+		if(tripwire) {
+			throw new RuntimeException("O wurrr");
+		}
+		return getFortune();
+	}
 }
