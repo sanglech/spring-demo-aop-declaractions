@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
+import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.reflect.MethodSignature;
@@ -77,6 +78,23 @@ public class MyDemoLoggingAspect {
 			person.setName(upperName);
 		}
 		
+	}
+	
+	
+	
+	@AfterThrowing(
+			pointcut="execution(* com.christian.aopdemo.dao.AccountDAO.findAccounts(..))",
+			throwing="theExc"
+			)
+	private void afterThrowingFindAccountsAdvice(JoinPoint theJoinPoint, Throwable theExc) {
+		// print pout which method we are advising  on
+		
+				String method = theJoinPoint.getSignature().toShortString();
+				
+				System.out.println("\n=====> Executing @AfterThrowing on method: "+ method);
+		//log the exception
+				System.out.println("\n=====>Exception is:  "+ theExc);		
+				
 	}
 	
 	

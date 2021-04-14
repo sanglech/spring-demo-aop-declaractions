@@ -42,11 +42,15 @@ public class AccountDAO {
 		return true;
 		}
 	
-	public List<Account> findAccounts(){
+	public List<Account> findAccounts(boolean tripwire){
 		
 		List<Account> myAccounts= new ArrayList<Account>();
 		
 		//create sample accounts
+		
+		if(tripwire) {
+			throw new RuntimeException("Test Exception");
+		}
 		
 		Account p1= new Account("John","gold");
 		Account p2= new Account("Chris","silver");
