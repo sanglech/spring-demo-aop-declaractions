@@ -3,9 +3,11 @@ package com.christian.aopdemo.aspects;
 import java.util.List;
 
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.AfterThrowing;
+import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.reflect.MethodSignature;
@@ -106,6 +108,33 @@ public class MyDemoLoggingAspect {
 		
 		System.out.println("\n=====> Executing @After(Finally) on method: "+ method);
 	}
+	
+	
+	@Around("execution(* com.christian.aopdemo.service.*.getFortune(..))")
+	public Object getFortune(ProceedingJoinPoint thePJP) throws Throwable {
+		
+		// print out which method we are advising  on
+		
+		String method = thePJP.getSignature().toShortString();
+		System.out.println("\n=====> Executing @Around on method: "+ method);
+
+		//get begin timestamp 
+		long begin=System.currentTimeMillis();
+		
+		//execute the method
+		Object result = thePJP.proceed();
+		
+		//get end timestamp
+		long end=System.currentTimeMillis();
+		
+		//compute duration and display it
+		
+		System.out.println("Time to execute "+ method+"  " +(end-begin)/1000.0+ " seconds.");
+		
+		
+		return result;
+	}
+	
 	
 	
 }
