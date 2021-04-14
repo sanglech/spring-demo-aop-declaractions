@@ -129,8 +129,8 @@ public class MyDemoLoggingAspect {
 		try {
 			 result = thePJP.proceed();
 		}catch(Exception e) {
-			myLogger.warning(e.getMessage());
-			result="No problems today!";
+			myLogger.warning("Problem in @Around: "+ e);
+			throw e;
 		}
 		
 		
